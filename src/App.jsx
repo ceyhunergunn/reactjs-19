@@ -1,7 +1,22 @@
+import { useState, useEffect } from "react";
+
+//eslint-disable-next-line
 const Card = ({ title }) => {
+  const [count, setCount] = useState(0);
+  const [hasLiked, setHasLiked] = useState(false);
+
+  useEffect(() => {
+    console.log(`${title} has been liked: ${hasLiked}`);
+    //eslint-disable-next-line
+  }, [hasLiked]);
+
+  useEffect(() => {
+    console.log("Card Rendered");
+  }, []);
   return (
     <div
       className="card"
+      onClick={() => setCount(count + 1)}
       // inline style
       // style={{
       //   border: "1px solid #4b5462",
@@ -12,7 +27,14 @@ const Card = ({ title }) => {
       //   minHeight: "100px",
       // }}
     >
-      <h2>{title}</h2>
+      <h2>
+        {title}
+        <br />
+        {count || null}
+      </h2>
+      <button onClick={() => setHasLiked(!hasLiked)}>
+        {hasLiked ? "❤️" : "🤍"}
+      </button>
     </div>
   );
 };
